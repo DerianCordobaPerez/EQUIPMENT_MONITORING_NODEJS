@@ -3,14 +3,40 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "authors": [
+    "Derian Còrdoda",
+    "Jonathan Mendoza"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DerianCordobaPerez/equipment_monitoring"
+  },
+  "bugs": {
+    "url": "https://github.com/DerianCordobaPerez/equipment_monitoring/issues"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon --exec babel-node src/index.js",
+    "build": "babel src -d build",
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@babel/runtime": "^7.16.3",
+    "@handlebars/allow-prototype-access": "^1.0.5",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
-    "handlebars": "^4.7.7"
+    "handlebars": "^4.7.7",
+    "mongoose": "^6.3.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "eslint": "^8.14.0",
+    "nodemon": "^2.0.14"
   }
 }
