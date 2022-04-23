@@ -1,9 +1,11 @@
+import './config/dotenv.config'
 import './database'
 import express from 'express'
 import cors from 'cors'
 import { join } from 'path'
-import { engine } from 'handlebars'
+import { engine } from 'express-handlebars'
 import { PORT } from './config/env.config'
+import homeRoutes from './routes/home.routes'
 
 const app = express()
 
@@ -24,5 +26,7 @@ app.use(cors())
 app.use(express.static(join(__dirname, 'public')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+app.use(homeRoutes)
 
 export default app
