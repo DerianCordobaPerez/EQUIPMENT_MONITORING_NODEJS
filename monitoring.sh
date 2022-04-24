@@ -17,13 +17,13 @@ elif [ "$command" = "users" ]; then
     last | grep logged
 elif [ "$command" = "table" ]; then
     netstat -nr
-# elif [ "$command" = "logs" ]; then
-#     cat /var/log/messages | head --lines=10
-# elif [ "$command" = "read" ]; then
-#     cat /logs/"logs - $ip".log
+elif [ "$command" = "logs" ]; then
+    cat /var/log/kern.log | head --lines=10 >> ./logs/"logs - $ip".log
+elif [ "$command" = "read" ]; then
+    cat /logs/"logs - $ip".log
 fi
 
-
+# cat /var/log/alternatives.log | head --lines=5
 # shh root@$ip bash -c "'
 #    if [ "$command" = "memory" ]; then
 #        free -m | awk '{print $2}'
