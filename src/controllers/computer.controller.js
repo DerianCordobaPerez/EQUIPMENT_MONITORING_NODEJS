@@ -1,5 +1,5 @@
 import Computer from '../models/computer'
-import { runCommands } from '../models/monitor'
+import { runCommands, updateLogs } from '../models/monitor'
 
 export async function index (req, res) {
   const computers = await Computer.find().lean()
@@ -37,6 +37,8 @@ export async function show(req, res) {
   const computer = await Computer.findOne({ ip }).lean()
 
   const monitoring = await runCommands({ ip })
+
+  updateLogs({ ip })
 
   res.render('computer/show', {
     title: 'Computer',

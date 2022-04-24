@@ -1,4 +1,5 @@
 import { execute } from './command'
+import { runSchedule } from './schedule'
 
 const commands = [
   'memory',
@@ -8,8 +9,6 @@ const commands = [
   'process',
   'users',
   'table',
-  'logs',
-  'read'
 ]
 
 export async function monitoring({ ip, command }) {
@@ -23,4 +22,8 @@ export async function runCommands({ ip }) {
       output: await monitoring({ ip, command })
     }
   }))
+}
+
+export function updateLogs({ ip }) {
+  runSchedule(() => execute(`./monitoring.sh ${ip} logs`), '*/5 * * * * *', { ip }) 
 }
