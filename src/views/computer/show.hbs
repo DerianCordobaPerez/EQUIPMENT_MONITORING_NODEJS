@@ -1,0 +1,35 @@
+<div
+  class="d-flex align-items-center w-100 justify-content-between bg-dark px-4 py-2 shadow rounded mb-4"
+>
+  <article>
+    <h3 class="text-white">
+      Monitoring
+      <span class="fw-bold text-decoration-underline">
+        {{computer.name}}
+      </span>
+      pc
+    </h1>
+  </article>
+
+  <form
+    action="/computers/{{computer.ip}}/destroy?_method=DELETE"
+    method="post"
+  >
+    <input type="hidden" name="_method" value="DELETE" />
+    <button class="btn btn-danger" type="submit">
+      Delete
+    </button>
+  </form>
+</div>
+
+{{#each monitoring}}
+  <p>
+    <span class="fw-bold">
+      {{this.command}}:
+    </span>
+
+    <span class="text-muted">
+      {{this.output}}
+    </span>
+  </p>
+{{/each}}

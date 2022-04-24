@@ -1,0 +1,49 @@
+<h2 class="text-center text-muted">
+  Edit computer
+</h2>
+
+<form action="/computers/{{computer.ip}}/edit?_method=PUT" method="post">
+  <input type="hidden" name="_method" value="PUT" />
+
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      placeholder="name"
+      name="name"
+      value="{{computer.name}}"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="ip" class="form-label">Ip</label>
+    <input
+      type="text"
+      class="form-control"
+      id="ip"
+      placeholder="ip"
+      name="ip"
+      disabled
+      readonly
+      value="{{computer.ip}}"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="role" class="form-label">Role</label>
+    <input
+      type="text"
+      class="form-control"
+      id="role"
+      placeholder="role"
+      name="role"
+      value="{{computer.role}}"
+    />
+  </div>
+
+  <button class="btn btn-primary" type="submit">
+    Send
+  </button>
+</form>

@@ -1,4 +1,5 @@
 import Computer from '../models/computer'
+import { runCommands } from '../models/monitor'
 
 export async function index (req, res) {
   const computers = await Computer.find().lean()
@@ -25,8 +26,9 @@ export async function store (req, res) {
   })
 
   await computer.save()
-    
-  res.redirect('/computer')
+  
+  req.flash('success', 'Computer created successfully')
+  res.redirect('/computers')
 }
 
 export async function show(req, res) {
@@ -34,9 +36,12 @@ export async function show(req, res) {
 
   const computer = await Computer.findOne({ ip }).lean()
 
+  const monitoring = await runCommands({ ip })
+
   res.render('computer/show', {
     title: 'Computer',
-    computer
+    computer,
+    monitoring
   })
 }
 
@@ -62,7 +67,8 @@ export async function update(req, res) {
     
   await computer.save()
     
-  res.redirect('/computer')
+  req.flash('success', 'Computer updated successfully')
+  res.redirect('/computers')
 }
 
 export async function destroy(req, res) {
@@ -70,5 +76,6 @@ export async function destroy(req, res) {
         
   await Computer.findOneAndDelete({ ip })
         
-  res.redirect('/computer')
+  req.flash('success', 'Computer deleted successfully')
+  res.redirect('/computers')
 }

@@ -1,0 +1,31 @@
+<h2 class="text-muted text-center">
+  Select the computer to monitor
+</h2>
+
+<a href="/computers/create" class="btn btn-success">
+  Create computer
+</a>
+
+{{#if computers}}
+  <div class="row row-cols-1 row-cols-md-4 g-4 mt-2">
+    {{#each computers}}
+      <div class="col">
+        <div class="card shadow border-success" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{this.role}}</h5>
+            <p class="card-text">
+              <span class="fw-bold">Ip: </span>
+              {{this.ip}}
+            </p>
+            <a href="computers/{{this.ip}}/show" class="card-link">Show</a>
+            <a href="computers/{{this.ip}}/edit" class="card-link">Edit</a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <div class="alert alert-info">
+    <p>There are no computers within the monitoring system</p>
+  </div>
+{{/if}}
