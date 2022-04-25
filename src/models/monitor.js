@@ -9,6 +9,7 @@ const commands = [
   'process',
   'users',
   'table',
+  'read'
 ]
 
 export async function monitoring({ ip, command }) {
@@ -25,5 +26,5 @@ export async function runCommands({ ip }) {
 }
 
 export function updateLogs({ ip }) {
-  runSchedule(() => execute(`./monitoring.sh ${ip} logs`), '*/5 * * * * *', { ip }) 
+  runSchedule(async () => await execute(`./monitoring.sh ${ip} logs`), '*/5 * * * * *', { ip }) 
 }

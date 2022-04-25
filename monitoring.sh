@@ -20,7 +20,7 @@ elif [ "$command" = "table" ]; then
 elif [ "$command" = "logs" ]; then
     cat /var/log/kern.log | head --lines=10 >> ./logs/"logs - $ip".log
 elif [ "$command" = "read" ]; then
-    cat /logs/"logs - $ip".log
+    cat ./logs/"logs - $ip".log
 fi
 
 # cat /var/log/alternatives.log | head --lines=5
