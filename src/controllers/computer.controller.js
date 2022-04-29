@@ -38,7 +38,7 @@ export async function show(req, res) {
 
   const monitoring = await runCommands({ ip })
 
-  updateLogs({ ip })
+  // updateLogs({ ip })
 
   res.render('computer/show', {
     title: 'Computer',

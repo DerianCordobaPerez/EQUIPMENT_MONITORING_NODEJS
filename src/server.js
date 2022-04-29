@@ -8,6 +8,7 @@ import MongoStore from 'connect-mongo'
 import flash from 'connect-flash'
 import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access'
 import Handlebars from 'handlebars'
+import handlebarsHelpers from './helpers/handlebars'
 import { join } from 'path'
 import methodOverride from 'method-override'
 import { PORT, MONGODB_URL, SECRET_SESSION } from './config/env.config'
@@ -26,6 +27,7 @@ app.engine(
     layoutsDir: join(app.get('views'), 'layouts'),
     partialsDir: join(app.get('views'), 'partials'),
     extname: '.hbs',
+    helpers: handlebarsHelpers,
   })
 )
 app.set('view engine', '.hbs')
