@@ -26,5 +26,9 @@ export async function runCommands({ ip }) {
 }
 
 export function updateLogs({ ip }) {
-  runSchedule(async () => await execute(`./monitoring.sh ${ip} logs`), '*/5 * * * * *', { ip }) 
+  runSchedule(
+    async () => await execute(`./monitoring.sh ${ip} logs`), 
+    '*/5 * * * * *', 
+    { ip }
+  ) 
 }

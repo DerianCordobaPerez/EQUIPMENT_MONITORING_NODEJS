@@ -22,14 +22,30 @@
   </form>
 </div>
 
-{{#each monitoring}}
-  <p>
-    <span class="fw-bold">
-      {{this.command}}:
-    </span>
-
-    <span class="text-muted">
-      {{this.output}}
-    </span>
-  </p>
-{{/each}}
+<div class="row">
+  {{#each monitoring}}
+    <div class="col-md-6 mt-4 shadow py-2">
+      <label for="{{this.command}}" class="fw-bold text-decoration-underline">
+        {{#capitalize this.command}} {{/capitalize}}
+      </label>
+      
+      <div class="d-flex align-items-center">
+        {{#checkLength this.output 500}}
+          <textarea
+            type="text"
+            class="form-control"
+            id="{{this.command}}"
+            name="{{this.command}}"
+            rows="7"
+          >
+            {{#trim this.output}} {{/trim}}
+          </textarea>
+        {{else}}
+          <span class="text-muted">
+            {{this.output}}
+          </span>
+        {{/checkLength}}
+      </div>
+    </div>
+  {{/each}}
+</div>
