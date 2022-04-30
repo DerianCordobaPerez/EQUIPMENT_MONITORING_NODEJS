@@ -11,7 +11,7 @@ function trim(str) {
     return ''
   }
 
-  return str.trimEnd().trimStart()
+  return str.trim()
 }
 
 function capitalize(str) {
