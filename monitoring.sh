@@ -18,7 +18,7 @@ elif [ "$command" = "users" ]; then
 elif [ "$command" = "table" ]; then
     netstat -nr
 elif [ "$command" = "logs" ]; then
-    cat /var/log/kern.log | head --lines=10 >> ./logs/"logs - $ip".log
+    cat /var/log/kern.log | head --lines=10 > ./logs/"logs - $ip".log
 elif [ "$command" = "read" ]; then
     cat ./logs/"logs - $ip".log
 elif [ "$command" = "ls" ]; then
