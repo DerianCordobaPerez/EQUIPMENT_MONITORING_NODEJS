@@ -1,5 +1,13 @@
 import { Router } from 'express'
-import { index, create, store, show, edit, update, destroy } from '../controllers/computer.controller'
+import { 
+  index, 
+  create, 
+  store, 
+  show, 
+  edit, 
+  update, 
+  destroy 
+} from '../controllers/computer.controller'
 
 const router = Router()
 
