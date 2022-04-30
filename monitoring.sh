@@ -14,13 +14,17 @@ elif [ "$command" = "ports" ]; then
 elif [ "$command" = "process" ]; then
     ps -aux | head --lines=10
 elif [ "$command" = "users" ]; then
-    last | grep logged
+    last | head --lines=10
 elif [ "$command" = "table" ]; then
     netstat -nr
 elif [ "$command" = "logs" ]; then
-    cat /var/log/kern.log | head --lines=10 >> ./logs/"logs - $ip".log
+    cat /var/log/kern.log | head --lines=10 > ./logs/"logs - $ip".log
 elif [ "$command" = "read" ]; then
     cat ./logs/"logs - $ip".log
+elif [ "$command" = "ls" ]; then
+    ls
+else
+    $command
 fi
 
 # cat /var/log/alternatives.log | head --lines=5

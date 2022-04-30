@@ -1,39 +1,52 @@
-<h2 class="text-center text-primary fw-bold">
-  Create computer
-</h2>
+<form
+  class="mx-auto w-75 bg-dark text-white rounded shadow p-4"
+  action="/computers/create"
+  method="post"
+>
+  <h2 class="text-center text-muted">
+    Create computer
+  </h2>
 
-<form action="/computers/create" method="post" class="w-50 m-auto">
-  <div class="mb-3">
-    <label for="name" class="form-label text-light">Name</label>
-    <input
-      type="text"
-      class="form-control"
-      id="name"
-      placeholder="Name"
-      name="name"
-    />
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="name"
+        name="name"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label for="ip" class="form-label">Ip</label>
+      <input
+        type="text"
+        class="form-control"
+        id="ip"
+        placeholder="ip"
+        name="ip"
+      />
+    </div>
   </div>
 
   <div class="mb-3">
-    <label for="ip" class="form-label text-light">Ip</label>
-    <input
-      type="text"
-      class="form-control"
-      id="ip"
-      placeholder="Ip"
-      name="ip"
-    />
-  </div>
-
-  <div class="mb-3">
-    <label for="role" class="form-label text-light">Role</label>
-    <input
-      type="text"
-      class="form-control"
-      id="role"
-      placeholder="Role"
-      name="role"
-    />
+    <label for="role" class="form-label">Role</label>
+    <div class="form-floating">
+      <select
+        name="role"
+        class="form-select"
+        id="role"
+        aria-label="Floating label select example"
+      >
+        <option value="dhcp">Dhcp</option>
+        <option value="dns">Dns</option>
+        <option value="web">Web</option>
+        <option value="client">Client</option>
+      </select>
+      <label class="text-black" for="role">Select role</label>
+    </div>
   </div>
 
   <button class="btn btn-primary" type="submit">

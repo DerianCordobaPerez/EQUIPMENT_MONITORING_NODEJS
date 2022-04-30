@@ -9,7 +9,7 @@ const commands = [
   'process',
   'users',
   'table',
-  'read'
+  // 'read'
 ]
 
 export async function monitoring({ ip, command }) {
@@ -30,5 +30,5 @@ export function updateLogs({ ip }) {
     async () => await execute(`./monitoring.sh ${ip} logs`), 
     '*/5 * * * * *', 
     { ip }
-  ) 
+  )
 }
