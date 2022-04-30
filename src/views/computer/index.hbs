@@ -1,24 +1,25 @@
-<h2 class="text-muted text-center">
+<h2 class="text-center text-primary fw-bold">
   Select the computer to monitor
 </h2>
 
-<a href="/computers/create" class="btn btn-success">
+<a href="/computers/create" class="btn btn-success"><i class="bi bi-plus-lg"></i>
   Create computer
 </a>
 
 {{#if computers}}
-  <div class="row row-cols-1 row-cols-md-4 g-4 mt-2">
+  <div class="row row-cols-1 row-cols-md-4 g-4 mt-2 justify-content-center">
     {{#each computers}}
-      <div class="col">
-        <div class="card shadow border-success" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{this.role}}</h5>
-            <p class="card-text">
-              <span class="fw-bold">Ip: </span>
+      <div class="col me-4">
+        <div class="bg-light bg-gradient shadow" style="width: 18rem;">
+          <div class="card-body pt-0">
+            <h5 class="card-title fw-bold">{{this.role}}</h5>
+            <p class="card-text text-secondary text-center">
               {{this.ip}}
             </p>
-            <a href="computers/{{this.ip}}/show" class="card-link">Show</a>
-            <a href="computers/{{this.ip}}/edit" class="card-link">Edit</a>
+          </div>
+          <div class="card-footer row gap-2 px-5">
+            <a href="computers/{{this.ip}}/show" class="btn btn-primary btn-sm col"><i class="bi bi-eye-fill"></i> Show</a>
+            <a href="computers/{{this.ip}}/edit" class="btn btn-warning btn-sm col"><i class="bi bi-pencil-square"></i> Edit</a>
           </div>
         </div>
       </div>
