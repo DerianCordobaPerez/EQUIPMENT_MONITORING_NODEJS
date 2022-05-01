@@ -1,3 +1,5 @@
+#!bin/bash
+
 die () {
     echo >&2 "$@"
     exit 1
@@ -8,31 +10,9 @@ die () {
 ip=$1
 command=$2
 
-# if [ "$command" = "memory" ]; then
-#     free
-# elif [ "$command" = "disk" ]; then
-#     df -h | awk '{print $4}'
-# elif [ "$command" = "ip" ]; then
-#     ifconfig
-# elif [ "$command" = "ports" ]; then
-#     netstat -lt && netstat -lu
-# elif [ "$command" = "process" ]; then
-#     ps -aux | head --lines=10
-# elif [ "$command" = "users" ]; then
-#     last | head --lines=10
-# elif [ "$command" = "table" ]; then
-#     netstat -nr
-# elif [ "$command" = "logs" ]; then
-#     cat /var/log/kern.log | head --lines=10 > ./logs/"logs - $ip".log
-# elif [ "$command" = "read" ]; then
-#     cat ./logs/"logs - $ip".log
-# elif [ "$command" = "ls" ]; then
-#     ls
-# else
-#     $command
-# fi
-
 ssh root@$ip bash -c "'
+   host=$(hostname)
+   
    if [ "$command" = "memory" ]; then
        free
    elif [ "$command" = "disk" ]; then
@@ -53,5 +33,19 @@ ssh root@$ip bash -c "'
       cat /etc/bind/named.conf.local
    elif [ "$command" = "web" ]; then
       apache2ctl -S
+   elif [ "$command" = "logs" ]; then
+      if [ ! -f /var/log/remote/$host/rsyslogd.log ]; then
+         touch ./logs/logs - $ip.log
+      fi
+
+      cat /var/log/remote/$host/rsyslogd.log > ./logs/logs - $ip.log
+   elif [ "$command" = "read" ]; then
+      if [ ! -f ~/rsyslogd.log ]; then
+         cat ./logs/logs - $ip.log
+      else
+         cat /var/log/remote/$host/rsyslogd.log
+      fi
+   elif [ "$command" = "client" ]; then
+      hostname
    fi
 '"

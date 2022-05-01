@@ -9,7 +9,7 @@ const commands = [
   'process',
   'users',
   'table',
-  // 'read'
+  'read'
 ]
 
 export async function monitoring({ ip, command }) {
