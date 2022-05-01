@@ -44,11 +44,12 @@ export async function show(req, res) {
 
   const computerFactory = new ComputerFactory(computer.role)
 
+  // computerFactory.computer.logs({ ip })
+
   res.render('computer/show', {
     title: 'Computer',
     computer,
-    monitoring: await computerFactory
-      .init({ ip: computer.ip })
+    monitoring: await computerFactory.init({ ip })
   })
 }
 

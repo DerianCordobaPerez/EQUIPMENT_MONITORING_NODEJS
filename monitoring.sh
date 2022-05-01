@@ -1,7 +1,14 @@
+die () {
+    echo >&2 "$@"
+    exit 1
+}
+
+[ "$#" -eq 2 ] || die "2 argument required, $# provided"
+
 ip=$1
 command=$2
 
-# echo "ip: $ip" && echo "command: $command"
+command -v $command >/dev/null 2>&1 || die "Command '$command' not found"
 
 if [ "$command" = "memory" ]; then
     free

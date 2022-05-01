@@ -16,12 +16,12 @@ export class ComputerFactory {
 
   constructor(type) {
     this.#type = type
+    this.computer = this.#computerStrategies[this.#type]
   }
 
   async init({ ip }) {
-    const computer = this.#computerStrategies[this.#type]
-
-    return await computer
+    return await this
+      .computer
       .run({ ip })
   }
 }
