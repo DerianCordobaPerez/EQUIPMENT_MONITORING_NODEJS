@@ -13,7 +13,6 @@ const computerSchema = new Schema({
   role: {
     type: String,
     required: true,
-    default: 'computer',
   }
 })
 

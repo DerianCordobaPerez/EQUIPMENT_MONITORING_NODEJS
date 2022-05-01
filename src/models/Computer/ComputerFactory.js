@@ -9,7 +9,7 @@ export class ComputerFactory {
 
   #computerStrategies = {
     client: new Computer(new ClientComputer()),
-    server: new Computer(new ServerComputer()),
+    web: new Computer(new ServerComputer()),
     dns: new Computer(new DnsComputer()),
     dhcp: new Computer(new DhcpComputer())
   }
