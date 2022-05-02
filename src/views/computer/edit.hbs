@@ -1,16 +1,19 @@
 <form
-  class="mx-auto w-75 bg-light rounded shadow p-4"
+  class="mx-auto bg-light rounded shadow p-4 form__computers"
   action="/computers/{{computer.ip}}/edit?_method=PUT"
   method="post"
 >
+
+<a href="/computers" class="form__close">
+<i class="bi bi-x-circle-fill"></i></a>
+
   <input type="hidden" name="_method" value="PUT" />
 
-  <h2 class="text-center text-muted">
+  <h2 class="text-center title__form">
     Edit computer
   </h2>
 
-  <div class="row mb-3">
-    <div class="col-md-6">
+    <div class="w-100">
       <label for="name" class="form-label">Name</label>
       <input
         type="text"
@@ -22,7 +25,7 @@
       />
     </div>
 
-    <div class="col-md-6">
+    <div class="w-100">
       <label for="ip" class="form-label">Ip</label>
       <input
         type="text"
@@ -32,7 +35,6 @@
         name="ip"
         value="{{computer.ip}}"
       />
-    </div>
   </div>
 
   <div class="mb-3">
@@ -54,7 +56,9 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" type="submit">
-    Send
+  <div class="d-flex justify-content-center">
+  <button class="btn btn-success w-50" type="submit">
+    <i class="bi bi-send-fill me-2"></i>Send
   </button>
+  </div>
 </form>
