@@ -1,8 +1,8 @@
 #!/bin/bash
 
 die () {
-    echo >&2 "$@"
-    exit 1
+   echo >&2 "$@"
+   exit 1
 }
 
 [ "$#" -eq 2 ] || die "2 argument required, $# provided"
@@ -29,7 +29,7 @@ else
       elif [ "$command" = "ports" ]; then
          netstat -lu && netstat -lt
       elif [ "$command" = "process" ]; then
-         ps -aux
+         ps -aux | tails --lines=10
       elif [ "$command" = "users" ]; then
          lastb
       elif [ "$command" = "table" ]; then
