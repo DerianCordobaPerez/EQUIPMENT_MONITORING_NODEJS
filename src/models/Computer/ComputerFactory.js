@@ -21,6 +21,10 @@ export class ComputerFactory {
     this.computer = this.#computerStrategies[this.#type]
   }
 
+  /**
+   * It runs the computer.
+   * @returns The computer is being returned.
+   */
   async init({ ip }) {
     return await this
       .computer

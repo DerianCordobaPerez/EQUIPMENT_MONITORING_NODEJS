@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose'
 
+/* Creating a schema for the computer model. */
 const computerSchema = new Schema({
   name: {
     type: String,
