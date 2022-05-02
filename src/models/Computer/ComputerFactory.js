@@ -1,7 +1,8 @@
 import { ClientComputer } from './ClientComputer'
-import { ServerComputer } from './ServerComputer'
+import { WebComputer } from './WebComputer'
 import { DnsComputer } from './DnsComputer'
 import { DhcpComputer } from './DhcpComputer'
+import { SnmpComputer } from './SnmpComputer'
 import { Computer } from './Computer'
 
 export class ComputerFactory {
@@ -9,9 +10,10 @@ export class ComputerFactory {
 
   #computerStrategies = {
     client: new Computer(new ClientComputer()),
-    web: new Computer(new ServerComputer()),
+    web: new Computer(new WebComputer()),
     dns: new Computer(new DnsComputer()),
-    dhcp: new Computer(new DhcpComputer())
+    dhcp: new Computer(new DhcpComputer()),
+    snmp: new Computer(new SnmpComputer())
   }
 
   constructor(type) {

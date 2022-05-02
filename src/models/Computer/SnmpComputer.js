@@ -1,12 +1,12 @@
 import { monitoring } from '../monitor'
 
-export class ServerComputer {
+export class SnmpComputer {
   /**
-   * It runs the `web` command on the server with the given IP address and returns the output
+   * It runs the `snmp` command on the given IP address and returns the output
    * @returns The command and the output of the command.
    */
   async run({ ip }) {
-    const command = 'web'
+    const command = 'snmp'
 
     return {
       command,
