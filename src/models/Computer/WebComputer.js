@@ -1,6 +1,6 @@
 import { monitoring } from '../monitor'
 
-export class ServerComputer {
+export class WebComputer {
   async run({ ip }) {
     const command = 'web'
 
