@@ -29,7 +29,7 @@ else
       elif [ "$command" = "ports" ]; then
          netstat -lu && netstat -lt
       elif [ "$command" = "process" ]; then
-         ps -aux | tails --lines=10
+         ps -aux | tail --lines=10
       elif [ "$command" = "users" ]; then
          lastb
       elif [ "$command" = "table" ]; then
@@ -40,6 +40,8 @@ else
          cat /etc/bind/named.conf.local
       elif [ "$command" = "web" ]; then
          apache2ctl -S
+      elif [ "$command" = "snmp" ]; then
+         snmpget -v1 -c public 192.168.10.1 sysDescr.0
       elif [ "$command" = "client" ]; then
          hostname
       fi
