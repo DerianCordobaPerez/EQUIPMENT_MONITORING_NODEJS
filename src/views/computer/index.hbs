@@ -1,47 +1,50 @@
-<h2 class="text-center text-primary fw-bold">
-  Select the computer to monitor
-</h2>
+<div class="computers__container">
 
-<a href="/computers/create" class="btn btn-success">
-  <i class="bi bi-plus-lg"></i>
-  Create computer
-</a>
+  <h2 class="text-center title__computers">
+    Select the computer to monitor
+  </h2>
 
-{{#if computers}}
-  <div class="row row-cols-1 row-cols-md-4 g-4 mt-2 justify-content-center">
-    {{#each computers}}
-      <div class="col me-4">
-        <div class="card bg-light bg-gradient shadow" style="width: 18rem;">
-          <div class="card-body pt-2">
-            <h4 class="card-title fw-bold">Name: {{this.name}}</h4>
-            <h5 class="card-title fw-bold">Role: {{this.role}}</h5>
-            <p class="card-text text-secondary text-center">
-              {{this.ip}}
-            </p>
-          </div>
-          <div class="card-footer row gap-2 px-5">
-            <a
-              href="computers/{{this.ip}}/show"
-              class="btn btn-primary btn-sm col"
-            >
-              <i class="bi bi-eye-fill"></i>
-              Show
-            </a>
+  {{#if computers}}
+    <div class="row row-cols-1 row-cols-md-4 g-4 mt-2 justify-content-evenly">
+      {{#each computers}}
+        <div class="col me-4">
+          <div class="card__computers" style="width: 18rem;">
+            <div class="overlay"></div>
+            <div class="card-body pt-2">
+              <h6 class="card-title fw-bold">{{this.name}}</h6>
+              <div class="body__details">
+                <p class="card-text">{{this.role}}</p>
+                <p class="card-text">
+                  {{this.ip}}
+                </p>
+                <i class="bi bi-laptop-fill"></i>
+              </div>
+            </div>
 
-            <a
-              href="computers/{{this.ip}}/edit"
-              class="btn btn-warning btn-sm col"
-            >
-              <i class="bi bi-pencil-square"></i>
-              Edit
-            </a>
+            <div class="separator">
+
+            </div>
+            <div class="card__footer">
+              <a href="computers/{{this.ip}}/show" class="me-1">
+                <i class="bi bi-eye-fill"></i>
+              </a>
+              <a href="computers/{{this.ip}}/edit" class="ms-1">
+                <i class="bi bi-pencil-square"></i>
+              </a>
+            </div>
+
           </div>
         </div>
-      </div>
-    {{/each}}
-  </div>
-{{else}}
-  <div class="my-4 alert alert-info">
-    <p>There are no computers within the monitoring system</p>
-  </div>
-{{/if}}
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="my-4 text-success text-center">
+      <h4>There are no computers within the monitoring system</h4>
+      <a href="/computers/create" class="btn btn-success mt-5 animation">
+        <i class="bi bi-plus-lg"></i>
+        Create computer
+      </a>
+      <i class="bi bi-hand-index-thumb-fill d-block hand"></i>
+    </div>
+  {{/if}}
+</div>
