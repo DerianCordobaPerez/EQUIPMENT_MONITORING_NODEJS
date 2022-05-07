@@ -20,8 +20,5 @@ elif [ "$command" = "read" ]; then
       cat /var/log/remote/`ssh -n root@$ip hostname`/rsyslogd.log
    fi
 else
-   # ssh root@$ip bash -c "'
-      
-   # '"
-   `node -pe "JSON.parse(process.argv[1]).$command" "$commands"`
+   ssh -n root@$ip `node -pe "JSON.parse(process.argv[1]).$command" "$commands"`
 fi
