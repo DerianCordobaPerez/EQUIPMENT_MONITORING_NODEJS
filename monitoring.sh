@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 die () {
    echo >&2 "$@"
@@ -7,23 +7,9 @@ die () {
 
 [ "$#" -eq 2 ] || die "2 argument required, $# provided"
 
+commands=`cat commands.json`
 ip=$1
 command=$2
-
-declare -A commands=(
-   ["memory"]="free"
-   ["disk"]="df -h"
-   ["ip"]="ifconfig"
-   ["ports"]="netstat -lu && netstat -lt"
-   ["users"]="lastb"
-   ["process"]="ps -aux | tail --lines=10"
-   ["table"]="netstat -nr"
-   ["dhcp"]="cat /etc/dhcp/dhcpd.conf | grep group -A 100"
-   ["dns"]="cat /etc/bind/named.conf.local"
-   ["web"]="apache2ctl -S"
-   ["snmp"]="snmpget -v1 -c public 192.168.10.1 sysDescr.0"
-   ["client"]="hostname"
-)
 
 if [ "$command" = "logs" ]; then
    cat /var/log/remote/`ssh -n root@$ip hostname`/rsyslogd.log > ./logs/"log - $ip".log
@@ -37,7 +23,5 @@ else
    # ssh root@$ip bash -c "'
       
    # '"
-   if [ -v commands[$command] ]; then
-      ${commands[$command]}
-   fi
+   `node -pe "JSON.parse(process.argv[1]).$command" "$commands"`
 fi
