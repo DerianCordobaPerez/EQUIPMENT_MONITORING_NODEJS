@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 die () {
    echo >&2 "$@"
@@ -10,6 +10,21 @@ die () {
 ip=$1
 command=$2
 
+declare -A commands=(
+   ["memory"]="free"
+   ["disk"]="df -h"
+   ["ip"]="ifconfig"
+   ["ports"]="netstat -lu && netstat -lt"
+   ["users"]="lastb"
+   ["process"]="ps -aux | tail --lines=10"
+   ["table"]="netstat -nr"
+   ["dhcp"]="cat /etc/dhcp/dhcpd.conf | grep group -A 100"
+   ["dns"]="cat /etc/bind/named.conf.local"
+   ["web"]="apache2ctl -S"
+   ["snmp"]="snmpget -v1 -c public 192.168.10.1 sysDescr.0"
+   ["client"]="hostname"
+)
+
 if [ "$command" = "logs" ]; then
    cat /var/log/remote/`ssh -n root@$ip hostname`/rsyslogd.log > ./logs/"log - $ip".log
 elif [ "$command" = "read" ]; then
@@ -19,31 +34,10 @@ elif [ "$command" = "read" ]; then
       cat /var/log/remote/`ssh -n root@$ip hostname`/rsyslogd.log
    fi
 else
-   ssh root@$ip bash -c "'
-      if [ "$command" = "memory" ]; then
-         free
-      elif [ "$command" = "disk" ]; then
-         df -h
-      elif [ "$command" = "ip" ]; then
-         ifconfig
-      elif [ "$command" = "ports" ]; then
-         netstat -lu && netstat -lt
-      elif [ "$command" = "process" ]; then
-         ps -aux | tail --lines=10
-      elif [ "$command" = "users" ]; then
-         lastb
-      elif [ "$command" = "table" ]; then
-         netstat -nr
-      elif [ "$command" = "dhcp" ]; then
-         cat /etc/dhcp/dhcpd.conf | grep group -A 100
-      elif [ "$command" = "dns" ]; then
-         cat /etc/bind/named.conf.local
-      elif [ "$command" = "web" ]; then
-         apache2ctl -S
-      elif [ "$command" = "snmp" ]; then
-         snmpget -v1 -c public 192.168.10.1 sysDescr.0
-      elif [ "$command" = "client" ]; then
-         hostname
-      fi
-   '"
+   # ssh root@$ip bash -c "'
+      
+   # '"
+   if [ -v commands[$command] ]; then
+      ${commands[$command]}
+   fi
 fi
