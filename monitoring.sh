@@ -7,6 +7,7 @@ die () {
 
 [ "$#" -eq 2 ] || die "2 argument required, $# provided"
 
+commands=`cat commands.json`
 ip=$1
 command=$2
 
@@ -19,31 +20,8 @@ elif [ "$command" = "read" ]; then
       cat /var/log/remote/`ssh -n root@$ip hostname`/rsyslogd.log
    fi
 else
-   ssh root@$ip bash -c "'
-      if [ "$command" = "memory" ]; then
-         free
-      elif [ "$command" = "disk" ]; then
-         df -h
-      elif [ "$command" = "ip" ]; then
-         ifconfig
-      elif [ "$command" = "ports" ]; then
-         netstat -lu && netstat -lt
-      elif [ "$command" = "process" ]; then
-         ps -aux | tail --lines=10
-      elif [ "$command" = "users" ]; then
-         lastb
-      elif [ "$command" = "table" ]; then
-         netstat -nr
-      elif [ "$command" = "dhcp" ]; then
-         cat /etc/dhcp/dhcpd.conf | grep group -A 100
-      elif [ "$command" = "dns" ]; then
-         cat /etc/bind/named.conf.local
-      elif [ "$command" = "web" ]; then
-         apache2ctl -S
-      elif [ "$command" = "snmp" ]; then
-         snmpget -v1 -c public 192.168.10.1 sysDescr.0
-      elif [ "$command" = "client" ]; then
-         hostname
-      fi
-   '"
+   # ssh root@$ip bash -c "'
+      
+   # '"
+   `node -pe "JSON.parse(process.argv[1]).$command" "$commands"`
 fi

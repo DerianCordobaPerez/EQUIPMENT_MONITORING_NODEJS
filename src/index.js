@@ -1,4 +1,5 @@
 import app from './server'
+import { getLocalIp } from './utils/getLocalIp'
 
 /**
  * The bootstrap function is an async function that listens on the port specified in the
@@ -6,8 +7,9 @@ import app from './server'
  */
 async function bootstrap() {
   app.listen(
-    app.get('port'), 
-    async () => console.log('Server running on port', app.get('port'))
+    app.get('port'),
+    getLocalIp(),
+    () => console.log('Server running on port', app.get('port'))
   )
 }
 

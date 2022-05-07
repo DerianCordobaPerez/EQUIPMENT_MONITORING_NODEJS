@@ -1,16 +1,6 @@
 import { execute } from './command'
 import { runSchedule } from './schedule'
-
-const commands = [
-  'memory',
-  'disk',
-  'ip',
-  'ports',
-  'process',
-  'users',
-  'table',
-  'read'
-]
+import { getCommands } from '../utils/getCommands'
 
 /**
  * It executes a shell script with the given arguments
@@ -26,12 +16,16 @@ export async function monitoring({ ip, command }) {
  * @returns An array of objects with the command and the output of the command.
  */
 export async function runCommands({ ip }) {
-  return await Promise.all(commands.map(async (command) => {
-    return {
-      command,
-      output: await monitoring({ ip, command })
-    }
-  }))
+  const commands = await getCommands()
+
+  return await Promise.all(commands
+    .map(async (command) => {
+      return {
+        command,
+        output: await monitoring({ ip, command })
+      }
+    })
+  )
 }
 
 /**
